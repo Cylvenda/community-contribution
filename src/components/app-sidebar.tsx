@@ -31,9 +31,9 @@ const data = {
   },
   teams: [
     {
-      name: "Mkuu Family",
+      name: "Community Contibution ",
       logo: GalleryVerticalEnd,
-      plan: "Community",
+      plan: "Free",
     }
 
   ],
