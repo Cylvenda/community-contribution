@@ -11,7 +11,7 @@ type Contributor = {
   id: number
   name: string
   amount: number
-  date?: string
+  date?: Date
   avatar: string
 }
 

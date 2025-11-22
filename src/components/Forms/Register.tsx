@@ -7,21 +7,28 @@ import { Field, FieldDescription, FieldGroup } from "../ui/field";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import { InputForm } from "./InputsForms";
+import { Separator } from "@radix-ui/react-separator";
+import { userRegister } from "@/services/auth/authService";
 
 const Register = () => {
 
     const form = useForm<z.infer<typeof RegisterFormSchema>>({
         resolver: zodResolver(RegisterFormSchema),
         defaultValues: {
-            firstName: "",
-            lastName: "",
+            first_name: "",
+            last_name: "",
             email: "",
+            username: "",
             password: ""
         },
     })
 
     const onSubmit = (values: z.infer<typeof RegisterFormSchema>) => {
+
+       const res = userRegister(values)
+       
         console.log(values)
+        console.log(res)
 
     }
 
@@ -40,18 +47,25 @@ const Register = () => {
                             <FieldGroup>
                                 <Field className="grid grid-cols-1 sm:grid-cols-2">
                                     <InputForm
-                                        name="firstName"
+                                        name="first_name"
                                         label="First Name"
                                         control={form.control}
                                         placeholder="Enter First Name"
                                     />
                                     <InputForm
-                                        name="lastName"
+                                        name="last_name"
                                         label="Last Name"
                                         control={form.control}
                                         placeholder="Enter Last Name"
                                     />
                                 </Field>
+
+                                <InputForm
+                                    name="username"
+                                    label="Username"
+                                    control={form.control}
+                                    placeholder="Enter Username"
+                                />
 
                                 <InputForm
                                     name="email"
@@ -75,6 +89,8 @@ const Register = () => {
                                 </Field>
                             </FieldGroup>
                         </form>
+                        <Separator />
+                        <Separator />
                     </CardContent>
                 </Card>
             </div>

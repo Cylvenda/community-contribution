@@ -8,6 +8,7 @@ import { InputForm } from "./InputsForms"
 import { Button } from "../ui/button"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
+import { Separator } from "@radix-ui/react-separator"
 
 
 const Login = () => {
@@ -55,14 +56,18 @@ const Login = () => {
 
               <Field>
                 <Button type="submit">Login</Button>
-                <FieldDescription className="flex justify-between  p-5">
-                  <span> Don&apos;t have an account?  <Link to="/register"> Register</Link> </span>
+                <Separator/>
+                <FieldDescription className="text-center">
                   <Link to="/reset-password" > Forget Password</Link>
+                </FieldDescription>
+                <FieldDescription className="text-center">
+                  Don&apos;t have an account?  <Link to="/register"> Register</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
           </form>
         </CardContent>
+        <Separator />
       </Card>
     </div>
   )

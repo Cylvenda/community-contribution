@@ -8,6 +8,7 @@ import { ResetFormSchema } from './FormSchema';
 import { zodResolver } from '@hookform/resolvers/zod'
 import  { Link } from 'react-router-dom'
 import { Button } from '../ui/button'
+import { Separator } from '@radix-ui/react-separator'
 
 const Reset = () => {
 
@@ -25,7 +26,7 @@ const Reset = () => {
         <Card>
             <CardHeader>
                 <CardTitle>Reset Password</CardTitle>
-                <CardDescription>Enter your Email to receive password Reset Link into your Mail inbox</CardDescription>
+                <CardDescription>Enter your valid Email to receive password Reset Link.</CardDescription>
             </CardHeader>
             <CardContent>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -46,8 +47,10 @@ const Reset = () => {
                         </Field>
                     </FieldGroup>
                 </form>
-            </CardContent>
+                <Separator />
 
+            </CardContent>
+            <Separator />
         </Card>
     )
 }

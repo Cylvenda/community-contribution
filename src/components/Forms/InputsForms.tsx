@@ -65,3 +65,5 @@ function FormBase<TFieldValues extends FieldValues = FieldValues,
 export const InputForm: FormControlFunction = props => {
     return <FormBase {...props}>{field => <Input {...field} />}</FormBase>
 }
+
+
