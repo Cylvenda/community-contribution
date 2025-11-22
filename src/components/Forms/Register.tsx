@@ -8,7 +8,8 @@ import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import { InputForm } from "./InputsForms";
 import { Separator } from "@radix-ui/react-separator";
-import { userRegister } from "@/services/auth/authService";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Register = () => {
 
@@ -23,13 +24,13 @@ const Register = () => {
         },
     })
 
-    const onSubmit = (values: z.infer<typeof RegisterFormSchema>) => {
+    const onSubmit = async (values: z.infer<typeof RegisterFormSchema>)  => {
 
-       const res = userRegister(values)
-       
-        console.log(values)
-        console.log(res)
+    //    const res = userRegister(values)
 
+        const res = await axios.post("http://127.0.0.1:8000/api/auth/users/", values)
+        
+            console.log(res.data.message)
     }
 
     return (

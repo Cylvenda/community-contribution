@@ -5,5 +5,5 @@ export const userRegister = async (value: UserType) => {
     
     Response = await api.post("auth/users/", value)
 
-    return Response.data
+    return Response
 }
