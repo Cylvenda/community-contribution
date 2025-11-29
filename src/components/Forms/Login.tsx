@@ -7,8 +7,9 @@ import { Field, FieldDescription, FieldGroup } from "../ui/field"
 import { InputForm } from "./InputsForms"
 import { Button } from "../ui/button"
 import { Link } from "react-router-dom"
-import { toast } from "react-toastify"
 import { Separator } from "@radix-ui/react-separator"
+import { userLogin } from "@/services/authService"
+
 
 
 const Login = () => {
@@ -24,7 +25,10 @@ const Login = () => {
 
   const onSubmit = (value: z.infer<typeof LoginFormSchema>) => {
     console.log(value)
-    toast.info(value.email + " logged in successfully!")
+    const res = userLogin(value)
+
+    console.log(res)
+    
   }
 
   return (

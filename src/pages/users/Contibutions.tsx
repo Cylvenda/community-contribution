@@ -1,29 +1,53 @@
-import { useState } from "react"
-import { ContributionsTable } from "@/components/contributions-table"
-import { ContributorsTable } from "@/components/contributors-table"
+import { DataTable } from "@/components/data-table"
+import type { ContributionsDataTypes } from "@/types/contributions";
+import { createColumnHelper } from "@tanstack/react-table";
+import data from "./con.json"
+import { Checkbox } from "@/components/ui/checkbox";
 
-import contributionsData from './con.json'
+const Contibutions = () => {
 
-export default function Contibutions() {
-  const [selectedContribution, setSelectedContribution] = useState<(typeof contributionsData)[0] | null>(null)
-
+  const columnHelper = createColumnHelper<ContributionsDataTypes>();
+  const columns = [
+    columnHelper.display({
+      id: "action",
+      header: ({ table }) => (
+        <Checkbox
+          checked={
+            table.getIsAllPageRowsSelected() ||
+            (table.getIsSomePageRowsSelected() && "indeterminate")
+          }
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label="Select all"
+        />
+      ),
+      cell: ({ row }) => (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+        />
+      )
+    }),
+    columnHelper.accessor("id", {
+      header: () => "ID",
+      cell: (info) => info.getValue()
+    }),
+    columnHelper.accessor("title", {
+      header: () => "Title",
+      cell: (info) => info.getValue()
+    }),
+    columnHelper.accessor("description", {
+      header: () => "Description",
+      cell: (info) => info.getValue()
+    }),
+    columnHelper.accessor(("contributors.amount"), {
+      header: () => "Contributors",
+      cell: (info) => info.getValue()
+    }),
+  ]
   return (
-    <main className="min-h-screen bg-background p-8">
-      <div className="mx-auto max-w-6xl space-y-6">
-        {!selectedContribution ? (
-          <div className="space-y-4">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight">Contributions</h1>
-              <p className="text-muted-foreground">Click on any contribution to view its contributors</p>
-            </div>
-            <ContributionsTable contributions={contributionsData} onContributionClick={setSelectedContribution} />
-          </div>
-        ) : (
-          <div className="space-y-4">
-            <ContributorsTable contribution={selectedContribution} onBack={() => setSelectedContribution(null)} />
-          </div>
-        )}
-      </div>
-    </main>
+    <div className="p-5 w-full flex-col justify-center items-center min-h-screen">
+      <DataTable<ContributionsDataTypes, any> columns={columns} data={data} />
+    </div>
   )
 }
+export default Contibutions

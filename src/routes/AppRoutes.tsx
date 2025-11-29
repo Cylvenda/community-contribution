@@ -16,27 +16,29 @@ import Settings from "@/pages/users/Settings"
 
 // Example test route
 import Test from "@/components/sections/Test"
+import EmailVerification from "@/pages/auth/EmailVerification"
 
 const AppRoutes = () => {
   return (
 
-      <Routes>
-        {/* Public routes */}
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/reset-password" element={<ResetPage />} />
-        <Route path="/test" element={<Test />} />
+    <Routes>
+      {/* Public routes */}
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/reset-password" element={<ResetPage />} />
+      <Route path="/email-verification/:uid/:token" element={<EmailVerification />} />
+      <Route path="/test" element={<Test />} />
 
-        {/* Protected routes (wrapped in layout) */}
-        <Route element={<UserLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/contributions" element={<Contibutions />} />
-          <Route path="/documentation" element={<Documentation />} />
-          <Route path="/members" element={<Members />} />
-          <Route path="/settings" element={<Settings />} />
-        </Route>
-      </Routes>
+      {/* Protected routes (wrapped in layout) */}
+      <Route element={<UserLayout />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/contributions" element={<Contibutions />} />
+        <Route path="/documentation" element={<Documentation />} />
+        <Route path="/members" element={<Members />} />
+        <Route path="/settings" element={<Settings />} />
+      </Route>
+    </Routes>
   )
 }
 

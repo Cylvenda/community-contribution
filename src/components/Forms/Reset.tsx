@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import  { Link } from 'react-router-dom'
 import { Button } from '../ui/button'
 import { Separator } from '@radix-ui/react-separator'
+import { userResetPassword } from '@/services/authService'
 
 const Reset = () => {
 
@@ -20,7 +21,9 @@ const Reset = () => {
     })
 
     const onSubmit = (values: z.infer<typeof ResetFormSchema>) => {
-        console.log(values)
+        
+        const res = userResetPassword(values)
+        console.log(res)
     }
     return (
         <Card>
